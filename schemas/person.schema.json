@@ -21,7 +21,9 @@
         "avatar": {"type": "string"},
         "logos": {"type": "array", "items": {"type": "string"}},
         "background": {"type": "string"},
-        "font": {"type": "string"}
+        "font": {"type": "string"},
+        "card": {"type": "string"},
+        "card_image": {"type": "string"}
       }
     }
   },

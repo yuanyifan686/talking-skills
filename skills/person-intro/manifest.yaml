@@ -12,7 +12,7 @@ inputs:
     generate: [person]
     render: [person]
     run_pipeline: [person]
-  optional: [duration, position, person_position, animation, style, logo, avatar, logo_file, background_image, font, source_video, output_dir, context]
+  optional: [duration, position, person_position, animation, style, logo, avatar, logo_file, card_image, background_image, font, source_video, output_dir, context]
 outputs: [person_intro, render_spec, video, context]
 interactive: false
 tools: [python, ffmpeg, ffprobe]

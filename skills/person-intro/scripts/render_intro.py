@@ -102,21 +102,23 @@ def draw_filters(
     left = position in {"left", "bottom_left"}
     bottom = position in {"bottom_left", "bottom_right"}
     x = "80" if left else "w-tw-80"
-    base_y = height - 340 if bottom else 260
+    base_y = height - 360 if bottom else 240
+    line_offsets = [0, 88, 150, 212]
     filters = []
     intro = min(0.45, max(0.15, duration / 3))
     fade_start = max(intro, duration - 0.5)
     panel_x = "40" if left else "w-780"
-    panel_y = str(height - 410 if bottom else 180)
+    panel_y = str(height - 430 if bottom else 160)
+    panel_height = 380
     panel_color = style.get("panel", "0B1220")
     accent = style.get("accent", "FFFFFF")
     text_color = style.get("text", "FFFFFF")
     filters.append(
-        f"drawbox=x={panel_x}:y={panel_y}:w=740:h=330:color={panel_color}@0.78:t=fill:"
+        f"drawbox=x={panel_x}:y={panel_y}:w=740:h={panel_height}:color={panel_color}@0.78:t=fill:"
         f"enable='between(t,0,{duration})'"
     )
     filters.append(
-        f"drawbox=x={panel_x}:y={panel_y}:w=8:h=330:color={accent}@0.95:t=fill:"
+        f"drawbox=x={panel_x}:y={panel_y}:w=8:h={panel_height}:color={accent}@0.95:t=fill:"
         f"enable='between(t,0,{duration})'"
     )
     if animation == "scan_fade":
@@ -126,7 +128,8 @@ def draw_filters(
         )
     for index, line in enumerate(lines):
         size = 64 if index == 0 else 34
-        static_y = base_y + index * 62
+        offset = line_offsets[index] if index < len(line_offsets) else line_offsets[-1] + (index - len(line_offsets) + 1) * 62
+        static_y = base_y + offset
         lift = 28 if animation in {"fade_slide", "scan_fade", "rise"} else 0
         y = f"{static_y}+if(lt(t,{intro}),{lift}*(1-t/{intro}),0)"
         filters.append(
@@ -148,6 +151,7 @@ def resolve_assets(args: argparse.Namespace, person: dict[str, Any]) -> dict[str
         "logo": logo_value,
         "background": getattr(args, "background_image", None) or assets.get("background"),
         "font": getattr(args, "font", None) or assets.get("font"),
+        "card": getattr(args, "card_image", None) or assets.get("card") or assets.get("card_image"),
     }
     resolved: dict[str, Path | None] = {}
     for key, value in values.items():
@@ -199,6 +203,7 @@ def render(args: argparse.Namespace, lines: list[str], resolved_position: str) -
     background_image = assets.get("background")
     avatar = assets.get("avatar")
     logo = assets.get("logo")
+    card = assets.get("card")
 
     command = ["ffmpeg", "-v", "error", "-y"]
     if source_video:
@@ -212,7 +217,7 @@ def render(args: argparse.Namespace, lines: list[str], resolved_position: str) -
         command += ["-f", "lavfi", "-i", background]
 
     asset_indices: dict[str, int] = {}
-    for key, path in (("avatar", avatar), ("logo", logo)):
+    for key, path in (("avatar", avatar), ("logo", logo), ("card", card)):
         if path:
             asset_indices[key] = len(asset_indices) + 1
             command += ["-loop", "1", "-i", str(path)]
@@ -223,24 +228,38 @@ def render(args: argparse.Namespace, lines: list[str], resolved_position: str) -
         base = f"scale={args.width}:{args.height}:force_original_aspect_ratio=increase,crop={args.width}:{args.height},setsar=1,fps={args.fps},format=yuv420p"
     filter_parts = [f"[0:v]{base}[base0]"]
     current = "[base0]"
-    for key in ("avatar", "logo"):
+    for key in ("avatar", "logo", "card"):
         if key not in asset_indices:
+            continue
+        if key == "card":
+            card_index = asset_indices[key]
+            filter_parts.append(
+                f"[{card_index}:v]scale=960:-1:force_original_aspect_ratio=decrease,format=rgba[card]"
+            )
+            filter_parts.append(
+                f"{current}[card]overlay=x=(W-w)/2:y=40:eof_action=pass:shortest=1:"
+                f"enable='between(t,0,{args.duration})'[next_card]"
+            )
+            current = "[next_card]"
             continue
         prepared, (merged, next_label) = _asset_overlay(current, key, asset_indices[key], resolved_position, args.duration, key)
         filter_parts.append(prepared)
         filter_parts.append(merged)
         current = next_label
-    text_filters = draw_filters(
-        lines,
-        font,
-        resolved_position,
-        args.width,
-        args.height,
-        args.duration,
-        style,
-        getattr(args, "animation", None),
-    )
-    filter_parts.append(f"{current}{text_filters}[vout]")
+    if "card" in asset_indices:
+        filter_parts.append(f"{current}null[vout]")
+    else:
+        text_filters = draw_filters(
+            lines,
+            font,
+            resolved_position,
+            args.width,
+            args.height,
+            args.duration,
+            style,
+            getattr(args, "animation", None),
+        )
+        filter_parts.append(f"{current}{text_filters}[vout]")
     command += ["-filter_complex", ";".join(filter_parts), "-map", "[vout]"]
     if source_video:
         command += ["-map", "0:a?", "-c:a", "aac"]
@@ -264,6 +283,7 @@ def main() -> int:
     parser.add_argument("--avatar", type=Path, help="Optional avatar image")
     parser.add_argument("--logo-file", type=Path, help="Optional logo image")
     parser.add_argument("--background-image", type=Path, help="Optional branded background image")
+    parser.add_argument("--card-image", type=Path, help="Optional complete person card image to display")
     parser.add_argument("--duration", type=float, default=4.0)
     parser.add_argument("--position", choices=["left", "right", "bottom_left", "bottom_right", "auto"], default="auto")
     parser.add_argument("--person-position", choices=["left", "right", "bottom_left", "bottom_right"])

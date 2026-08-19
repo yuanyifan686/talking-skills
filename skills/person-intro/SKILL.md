@@ -30,6 +30,7 @@ Do not invent credentials, verify a person’s claims, create a full biography, 
 - `person_position` when `position: auto` lacks visual detection.
 - `animation`, `style`, `logo`, `avatar`, `logo_file`, `background_image`, dimensions, font, background, and output path.
 - `input.person.assets.avatar`, `input.person.assets.logos`, `input.person.assets.background`, and `input.person.assets.font` for user-provided media assets.
+- `input.person.assets.card` or `card_image` for a complete user-designed person card image. When supplied, display the card directly and skip duplicate text rendering.
 - Portable `context` conforming to `../../schemas/context.schema.json`.
 
 ## Workflow
@@ -40,8 +41,9 @@ Do not invent credentials, verify a person’s claims, create a full biography, 
 4. Select only the name, core role, and one or two strongest supplied background labels. Do not display every field.
 5. Resolve position. For `auto`, place text opposite the detected or supplied person position. If neither is available, default to `bottom_left` and mark the decision as a fallback.
 6. Resolve user-provided avatar, logo, background, and font paths. Never invent or download identity assets without authorization.
-7. Return the selected copy and render specification before rendering.
-8. For rendering, call `scripts/render_intro.py`. Without a source video, store the standalone card at `context.project.video.person_intro`. With `source_video`, overlay the card during the first seconds of the question-hook output and store the result at `context.project.video.final`.
+7. If a complete card image is supplied, validate it and use it as the primary visual layer instead of duplicating the text card.
+8. Return the selected copy and render specification before rendering.
+9. For rendering, call `scripts/render_intro.py`. Without a source video, store the standalone card at `context.project.video.person_intro`. With `source_video`, overlay the card during the first seconds of the question-hook output and store the result at `context.project.video.final`.
 
 ## Interaction Rules
 
