@@ -1,0 +1,15 @@
+version: 1.0.0
+patterns:
+  - {id: why, name: 为什么型, formula: "为什么X，反而Y？", best_for: [cause, misconception]}
+  - {id: contrast, name: 反差型, formula: "X越多，就真的越Y吗？", best_for: [counter_intuitive, behavior]}
+  - {id: benefit, name: 利益型, formula: "怎样用X，少走Y弯路？", best_for: [practical, business]}
+  - {id: trend, name: 趋势型, formula: "未来X，真正拉开差距的是什么？", best_for: [AI, career, business]}
+  - {id: identity, name: 身份型, formula: "为什么同样是X，有人Y，有人Z？", best_for: [audience, comparison]}
+  - {id: either_or, name: 二选一, formula: "面对X，你会选Y还是Z？", best_for: [comments, debate]}
+  - {id: result_suspense, name: 结果悬念, formula: "做到X以后，结果真的会更好吗？", best_for: [story, suspense]}
+  - {id: cognitive_conflict, name: 认知挑战, formula: "你一直相信的X，可能从一开始就错了吗？", best_for: [belief, insight]}
+constraints:
+  chinese_characters: {min: 8, max: 25}
+  punctuation: question_mark_required
+  relation_to_script: direct
+  avoid: [fabricated_fact, unrelated_clickbait, double_question, vague_pronoun]

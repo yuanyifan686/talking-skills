@@ -1,0 +1,14 @@
+id: workbuddy
+version: 1.0.0
+description: Map WorkBuddy capability calls to the universal Talking Skills protocol.
+extends: ../generic/adapter.yaml
+core_skill_root: ../../skills
+mapping:
+  discovery_source: manifest.yaml
+  instruction_source: SKILL.md
+  invocation_target: universal_invocation
+  response_source: universal_response
+constraints:
+  - Keep business behavior in the core skill only.
+  - Preserve state and context across interrupted runs.
+  - Treat tool availability as capabilities, not assumptions.

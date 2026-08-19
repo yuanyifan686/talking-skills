@@ -1,0 +1,36 @@
+id: score-viral-script
+name: Viral Spoken Script Scorer
+version: 1.0.1
+protocol_version: 1.0.0
+description: Produce and validate a 100-point evidence-backed viral-potential scorecard for Chinese spoken scripts.
+category: [content, short-video, copywriting, quality]
+capabilities: [score_script, validate_scorecard, identify_weak_dimensions, quality_gate]
+actions: [score, validate]
+states: [scoring, validation, completed]
+inputs:
+  required_by_action:
+    score: [script]
+    validate: [script, assessment]
+  optional: [title, platform, audience, goal, strict_evidence, context]
+outputs: [scorecard, subtotals, total, conclusion, strongest_dimensions, priority_improvements, context]
+interactive: false
+tools: [python]
+dependencies: []
+requirements:
+  runtime: []
+  binaries: []
+  permissions:
+    filesystem: optional
+    network: false
+  external_services:
+    llm: required
+requirements_by_action:
+  score: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  validate: {runtime: [python], binaries: [], permissions: {filesystem: optional}, external_services: {}}
+execution_modes: [full, partial, text_only]
+schemas:
+  invocation: ../../schemas/invocation.schema.json
+  response: ../../schemas/response.schema.json
+  score: ../../schemas/score.schema.json
+references:
+  rubric: references/scoring_rubric.yaml

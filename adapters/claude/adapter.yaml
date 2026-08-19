@@ -1,0 +1,14 @@
+id: claude
+version: 1.0.0
+description: Map Claude tool or prompt entrypoints to the universal Talking Skills protocol.
+extends: ../generic/adapter.yaml
+core_skill_root: ../../skills
+mapping:
+  discovery_source: manifest.yaml
+  instruction_source: SKILL.md
+  invocation_target: universal_invocation
+  response_source: universal_response
+constraints:
+  - Do not duplicate skill workflows in Claude-specific prompts.
+  - Persist state in the universal response and pipeline context.
+  - Treat tool availability as capabilities, not assumptions.

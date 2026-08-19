@@ -1,0 +1,26 @@
+version: 1.0.0
+presets:
+  - id: sharp
+    label: 锐度观点
+    tag: 高冲突
+    fit: 适合引发评论
+    style: sharp_opinion
+    instruction: 用可信的立场冲突快速打断预测，观点明确但不攻击人。
+  - id: story
+    label: 故事代入
+    tag: 强画面
+    fit: 适合提高完播
+    style: story_conflict
+    instruction: 用常见场景或明确标注为假设的故事推进，不编造真人案例。
+  - id: warm
+    label: 温和共鸣
+    tag: 有温度
+    fit: 适合建立信任
+    style: emotional_resonance
+    instruction: 精准命名观众感受，给出理解和出口，不制造焦虑。
+  - id: debate
+    label: 评论引导
+    tag: 可站队
+    fit: 适合扩大讨论
+    style: counter_intuitive
+    instruction: 提出一个有边界的可讨论立场，以自然问题结束，不强迫互动。

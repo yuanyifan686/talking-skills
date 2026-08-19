@@ -1,0 +1,60 @@
+id: short-video-default
+version: 1.2.0
+description: Default composable AI short-video pipeline.
+context_schema: ../../schemas/context.schema.json
+steps:
+  - id: script
+    skill: viral-script
+    action: run_pipeline
+    input:
+      auto_select: true
+      variant_count: 1
+    writes: [project.topic, project.platform, project.script]
+  - id: score
+    skill: score-viral-script
+    action: score
+    reads: [project.script]
+    writes: [project.script_score]
+    gate:
+      pass: project.script_score.total >= 80
+      optimize: 60 <= project.script_score.total < 80
+      rewrite: project.script_score.total < 60
+  - id: optimize
+    skill: optimize-viral-script
+    action: optimize
+    when: project.script_score.total < 80
+    reads: [project.script, project.script_score]
+    writes: [project.script_score_previous, project.script_optimization, project.script]
+  - id: rescore
+    skill: score-viral-script
+    action: score
+    when: project.script_optimization.optimized_script
+    reads: [project.script]
+    writes: [project.script_score]
+    gate:
+      pass: project.script_score.total >= 80
+      continue_best_version: project.script_score.total < 80
+  - id: hook
+    skill: question-hook
+    action: run_pipeline
+    reads: [project.script]
+    writes: [project.hook, project.video.question_intro, project.video.hooked]
+  - id: person
+    skill: person-intro
+    action: run_pipeline
+    when: project.person.name
+    reads: [project.person, project.video.hooked]
+    writes: [project.video.person_intro, project.video.final]
+composition:
+  stages:
+    - prepend: project.video.question_intro
+      to: project.video.source
+      output: project.video.hooked
+    - overlay: project.video.person_intro
+      on: project.video.hooked
+      start: 0
+      duration: 4
+      output: project.video.final
+extensions:
+  insertion_policy: append_without_modifying_existing_steps
+  supported_future_skills: [subtitle, auto-caption, bgm, cover-generator, auto-edit, news-script, product-script, digital-human, lip-sync, publish]

@@ -1,0 +1,97 @@
+version: 1.0.0
+templates:
+  - id: phenomenon_cause_reverse_v1
+    name: 现象归因反转
+    kicker: 母结构 01
+    description: 把表面问题反转到真正根因，适合家庭、成长、职场和关系话题。
+    display_chain: [现象, 反转, 根因, 建议, 金句]
+    color: coral
+    suitable_topics: [education, family, career, relationship, personal-growth]
+    platforms: [douyin, video-account, xiaohongshu, generic]
+    title_types: [cognitive_conflict, strong_question]
+    title_formula: ["为什么你看到的X，往往不是问题本身？", "X真正的问题，可能根本不在X"]
+    hook_formula: ["很多人看到X，第一反应是Y，但真正要改的可能是Z。"]
+    structure: [phenomenon, reverse, root_cause, scene, actionable_shift, insight]
+    rhythm: {sentence_length: short, pace: medium_fast, escalation: progressive}
+    ending_style: [insight, open_question]
+    avoid: [blame_without_evidence, fake_fact, absolute_claim]
+
+  - id: cognitive_contrast_upgrade_v1
+    name: 认知升级对比
+    kicker: 母结构 02
+    description: 用“不是 A，而是 B”替观众升级理解问题的方式。
+    display_chain: [提问, 对比, 论证, 案例, 结论]
+    color: blue
+    suitable_topics: [AI, business, career, education, product]
+    platforms: [douyin, video-account, bilibili, generic]
+    title_types: [counter_intuitive, trend_judgment, cognitive_conflict]
+    title_formula: ["未来真正拉开差距的，不是X，而是Y", "真正的X，可能根本不是Y"]
+    hook_formula: ["为什么未来最大的差距不是X，而是Y？"]
+    structure: [question, common_belief, contrast, reasoning, example, upgraded_view, conclusion]
+    rhythm: {sentence_length: mixed, pace: medium, escalation: logical}
+    ending_style: [insight, prediction]
+    avoid: [empty_abstraction, unsupported_prediction]
+
+  - id: suspense_reveal_emotion_v1
+    name: 悬念揭晓情绪
+    kicker: 母结构 03
+    description: 先给答案承诺，延迟揭晓，用特征和画面托住完播。
+    display_chain: [悬念, 特征, 画面, 反差, 揭晓]
+    color: yellow
+    suitable_topics: [relationship, astrology, personality, lifestyle, knowledge]
+    platforms: [douyin, xiaohongshu, video-account, generic]
+    title_types: [result_suspense, identity_conflict, strong_question]
+    title_formula: ["真正能给你X的，只有这两类人", "最容易X的人，到底是谁？"]
+    hook_formula: ["答案只有两个，但先别急着对号入座。"]
+    structure: [promise, delayed_answer, traits, scenes, contrast, reveal]
+    rhythm: {sentence_length: short, pace: fast, escalation: suspense}
+    ending_style: [reveal, identity_prompt]
+    avoid: [false_certainty, harmful_stereotype]
+
+  - id: opportunity_conversion_v1
+    name: 机会营销转化
+    kicker: 母结构 04
+    description: 从机会切入，以价值证明和可信边界自然承接行动。
+    display_chain: [机会, 红利, 背书, 方案, 行动]
+    color: mint
+    suitable_topics: [business, side-hustle, course, service, product, AI]
+    platforms: [douyin, video-account, xiaohongshu, generic]
+    title_types: [benefit_conflict, trend_judgment, result_suspense]
+    title_formula: ["正在变吃香的X，大多数人还没注意到", "X为什么可能是下一轮机会？"]
+    hook_formula: ["说它冷门，是因为很多人没注意；说它吃香，是因为需求已经出现。"]
+    structure: [opportunity, market_reason, value_proof, trust_boundary, solution, action]
+    rhythm: {sentence_length: short, pace: fast, escalation: evidence_first}
+    ending_style: [soft_cta, qualification]
+    avoid: [income_promise, fake_policy, fabricated_authority, scarcity_pressure]
+
+  - id: scene_story_shift_v1
+    name: 场景故事转折
+    kicker: 创新结构 05
+    description: 用具体场景、阻力和行动变化形成故事转折。
+    display_chain: [场景, 目标, 阻力, 发现, 改变]
+    color: coral
+    suitable_topics: [education, workplace, relationship, entrepreneurship, personal-growth]
+    platforms: [douyin, video-account, xiaohongshu, generic]
+    title_types: [identity_conflict, result_suspense]
+    title_formula: ["我见过最可惜的X，是从这件小事开始的", "直到发生X，我才看懂Y"]
+    hook_formula: ["我见过这样一个很典型的场景。"]
+    structure: [scene, character_goal, friction, failed_attempt, discovery, changed_action, takeaway]
+    rhythm: {sentence_length: mixed, pace: medium, escalation: narrative}
+    ending_style: [reflection, open_question]
+    avoid: [fabricated_real_person, excessive_setup]
+
+  - id: question_layered_answer_v1
+    name: 问题递进回答
+    kicker: 创新结构 06
+    description: 从强问题出发，逐层排除误解并交付可执行答案。
+    display_chain: [问题, 症状, 误区, 原因, 方法]
+    color: blue
+    suitable_topics: [knowledge, AI, education, career, business, local-life]
+    platforms: [douyin, bilibili, video-account, generic]
+    title_types: [strong_question, cognitive_conflict]
+    title_formula: ["为什么X越努力，结果反而越差？", "X到底应该怎么做？"]
+    hook_formula: ["你有没有发现，X明明做得更多，Y却没有变好？"]
+    structure: [question, symptom, false_answer, cause, practical_steps, boundary, conclusion]
+    rhythm: {sentence_length: short, pace: medium_fast, escalation: layered_answer}
+    ending_style: [practical_prompt, insight]
+    avoid: [question_without_answer, generic_advice]

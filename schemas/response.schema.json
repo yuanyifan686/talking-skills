@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/response.schema.json",
+  "title": "Universal Skill Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "state", "message", "data", "files", "next_actions", "errors"],
+  "properties": {
+    "protocol_version": {"type": "string", "default": "1.0.0"},
+    "request_id": {"type": ["string", "null"]},
+    "status": {"enum": ["success", "awaiting_user", "partial", "error"]},
+    "state": {"type": "string"},
+    "message": {"type": "string"},
+    "data": {"type": "object"},
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "kind"],
+        "properties": {
+          "path": {"type": "string"},
+          "kind": {"type": "string"},
+          "mime_type": {"type": "string"},
+          "exists": {"type": "boolean"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "next_step": {"type": "string"},
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"type": "string"},
+          {
+            "type": "object",
+            "required": ["skill", "action"],
+            "properties": {"skill": {"type": "string"}, "action": {"type": "string"}, "reason": {"type": "string"}},
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "message"],
+        "properties": {"code": {"type": "string"}, "message": {"type": "string"}, "recoverable": {"type": "boolean"}},
+        "additionalProperties": true
+      }
+    },
+    "context": {"$ref": "context.schema.json"}
+  }
+}

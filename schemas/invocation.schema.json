@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/invocation.schema.json",
+  "title": "Universal Skill Invocation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["skill", "action", "input"],
+  "properties": {
+    "protocol_version": {"type": "string", "default": "1.0.0"},
+    "request_id": {"type": "string"},
+    "skill": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "action": {"type": "string", "minLength": 1},
+    "state": {"type": ["string", "null"]},
+    "mode": {"enum": ["auto", "full", "partial", "text_only"], "default": "auto"},
+    "input": {"type": "object"},
+    "context": {"$ref": "context.schema.json"},
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"}
+    }
+  }
+}

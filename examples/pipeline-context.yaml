@@ -1,0 +1,42 @@
+protocol_version: 1.0.0
+project:
+  id: ai_video_001
+  topic: AI创业
+  platform: douyin
+  script:
+    title: AI真正淘汰的，可能不是不会用AI的人
+    content: 真正会使用AI的人，并不是每天研究几十种AI工具的人。
+    estimated_duration: 30
+    estimated_characters: 190
+  script_score:
+    source_script: 真正会使用AI的人，并不是每天研究几十种AI工具的人。
+    dimensions:
+      interrupt_prediction: {score: 8, evidence: [{quote: "并不是每天研究几十种AI工具的人", reason: "直接反转工具越多越会用AI的预期"}], improvement: null}
+      reward_expectation: {score: 6, evidence: [{quote: "真正会使用AI的人", reason: "给出方向，但没有明确看完后的具体收益"}], improvement: "在开头明确观众看完能掌握的一个方法"}
+      loss_aversion: {score: 3, evidence: [{quote: "每天研究几十种AI工具", reason: "指出常见行为，但没有说明继续这样做会损失什么"}], improvement: "补充错误使用工具将浪费时间或错过机会的具体后果"}
+      precise_naming: {score: 6, evidence: [{quote: "每天研究几十种AI工具", reason: "说中工具焦虑行为，但未命名更隐蔽的心理感受"}], improvement: "加入用户嘴上不说但真实存在的工具收藏焦虑"}
+      replicability: {score: 4, evidence: [{quote: "真正会使用AI的人", reason: "有判断但没有可直接套用的步骤或句式"}], improvement: "补充判断任务、选择工具、验证结果的三步公式"}
+      no_fluff: {score: 8, evidence: [{quote: "并不是每天研究几十种AI工具的人", reason: "表达短促直接，没有铺垫性废话"}], improvement: null}
+      ai_adaptability: {score: 5, evidence: [{quote: "真正会使用AI的人", reason: "核心判断清楚，但样本过短，难以稳定拆出完整逻辑"}], improvement: "补充明确的反转、解释和行动结构"}
+      emotional_intensity: {score: 4, evidence: [{quote: "每天研究几十种AI工具", reason: "能触发轻微焦虑，但情绪张力有限"}], improvement: "加入一个工具越学越焦虑的具体场景"}
+      memorability: {score: 7, evidence: [{quote: "真正会使用AI的人，并不是每天研究几十种AI工具的人", reason: "反转句式易复述，但还缺少更凝练的金句"}], improvement: "凝练成工具不是能力，解决问题才是能力"}
+      shareability: {score: 5, evidence: [{quote: "真正会使用AI的人", reason: "话题有讨论价值，但缺少可分享的实用结论"}], improvement: "增加一个能帮助朋友判断AI学习方向的清单"}
+  hook:
+    text: AI工具用得越多，就真的越厉害吗？
+    type: cognitive_conflict
+    estimated_duration: 2.6
+    relation_to_script: direct
+  person:
+    name: 袁艺凡
+    title: FDE 前沿部署工程师
+    education: [维多利亚大学计算机系]
+    experience: [加拿大海外6年工作经验]
+  video:
+    source: input/source.mp4
+    question_intro: output/question-intro.mp4
+    person_intro: output/person-intro.mp4
+    hooked: output/hooked.mp4
+    final: output/final.mp4
+    composition_plan:
+      sequence: [question_intro, source]
+      person_intro_overlay: {target: source, start: 0, duration: 4}

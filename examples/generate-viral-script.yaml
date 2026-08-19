@@ -1,0 +1,15 @@
+protocol_version: 1.0.0
+request_id: example-ai-001
+skill: viral-script
+action: generate
+mode: auto
+input:
+  topic: AI创业
+  duration: 30
+  platform: douyin
+context:
+  protocol_version: 1.0.0
+  project:
+    id: ai_video_001
+    topic: AI创业
+    platform: douyin

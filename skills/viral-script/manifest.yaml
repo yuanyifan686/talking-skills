@@ -1,0 +1,51 @@
+id: viral-script
+name: Viral Script Generator
+version: 1.1.0
+protocol_version: 1.0.0
+description: Generate titles and spoken scripts, analyze scripts, and create reusable templates through an interactive state machine.
+category: [content, short-video, copywriting]
+capabilities:
+  - generate_titles
+  - generate_script
+  - analyze_script
+  - create_template
+  - manage_templates
+actions: [generate, continue, run_pipeline, analyze, create_template, add_template]
+states: [topic, title_generation, title_selection, style_selection, script_generation, analysis_mode, completed]
+inputs:
+  required_by_action:
+    generate: [topic]
+    continue: [state]
+    run_pipeline: [topic]
+    analyze: [script]
+    create_template: [script]
+    add_template: [template]
+  optional: [platform, duration, audience, category, style, template_id, structure_id, goal, question_hook, auto_select, variant_count, variant_styles, context]
+outputs: [titles, script, analysis, template, metadata, context]
+interactive: true
+tools: []
+dependencies: []
+requirements:
+  runtime: []
+  binaries: []
+  permissions:
+    filesystem: optional
+    network: false
+  external_services:
+    llm: required
+requirements_by_action:
+  generate: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  continue: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  run_pipeline: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  analyze: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  create_template: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  add_template: {runtime: [], binaries: [], permissions: {filesystem: required}, external_services: {}}
+execution_modes: [full, partial, text_only]
+schemas:
+  invocation: ../../schemas/invocation.schema.json
+  response: ../../schemas/response.schema.json
+  script: ../../schemas/script.schema.json
+references:
+  templates: references/copy_templates.yaml
+  styles: references/style_presets.yaml
+  deliveries: references/delivery_presets.yaml

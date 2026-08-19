@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/score.schema.json",
+  "title": "Viral Spoken Script Scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_script", "dimensions"],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quote", "reason"],
+      "properties": {
+        "quote": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 4}
+      }
+    },
+    "standardDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "evidence", "improvement"],
+      "properties": {
+        "score": {"type": "integer", "minimum": 1, "maximum": 10},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+        "improvement": {"type": ["string", "null"]}
+      }
+    },
+    "bonusDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "evidence", "improvement"],
+      "properties": {
+        "score": {"type": "integer", "minimum": 0, "maximum": 10},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+        "improvement": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "properties": {
+    "rubric_version": {"type": "string"},
+    "source_script": {"type": "string", "minLength": 1},
+    "title": {"type": ["string", "null"]},
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["interrupt_prediction", "reward_expectation", "loss_aversion", "precise_naming", "replicability", "no_fluff", "ai_adaptability", "emotional_intensity", "memorability", "shareability"],
+      "properties": {
+        "interrupt_prediction": {"$ref": "#/$defs/standardDimension"},
+        "reward_expectation": {"$ref": "#/$defs/standardDimension"},
+        "loss_aversion": {"$ref": "#/$defs/standardDimension"},
+        "precise_naming": {"$ref": "#/$defs/standardDimension"},
+        "replicability": {"$ref": "#/$defs/standardDimension"},
+        "no_fluff": {"$ref": "#/$defs/standardDimension"},
+        "ai_adaptability": {"$ref": "#/$defs/standardDimension"},
+        "emotional_intensity": {"$ref": "#/$defs/bonusDimension"},
+        "memorability": {"$ref": "#/$defs/bonusDimension"},
+        "shareability": {"$ref": "#/$defs/bonusDimension"}
+      }
+    },
+    "subtotals": {
+      "type": "object",
+      "required": ["core", "practicality", "bonus"],
+      "properties": {
+        "core": {"type": "integer", "minimum": 4, "maximum": 40},
+        "practicality": {"type": "integer", "minimum": 3, "maximum": 30},
+        "bonus": {"type": "integer", "minimum": 0, "maximum": 30}
+      },
+      "additionalProperties": false
+    },
+    "total": {"type": "integer", "minimum": 7, "maximum": 100},
+    "conclusion": {
+      "type": "object",
+      "required": ["level", "label"],
+      "properties": {
+        "level": {"enum": ["very_high", "potential", "insufficient"]},
+        "label": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "strongest_dimensions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "priority_improvements": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

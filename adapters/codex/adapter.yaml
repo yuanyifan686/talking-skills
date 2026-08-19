@@ -1,0 +1,14 @@
+id: codex
+version: 1.0.0
+description: Map Codex skill discovery and task input to the universal Talking Skills protocol.
+extends: ../generic/adapter.yaml
+core_skill_root: ../../skills
+mapping:
+  discovery_source: manifest.yaml
+  instruction_source: SKILL.md
+  invocation_target: universal_invocation
+  response_source: universal_response
+constraints:
+  - Do not copy business rules into this adapter.
+  - Keep core skill paths resolvable from the repository root.
+  - Treat tool availability as capabilities, not assumptions.

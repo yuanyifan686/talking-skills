@@ -1,0 +1,45 @@
+id: optimize-viral-script
+name: Viral Spoken Script Optimizer
+version: 1.0.0
+protocol_version: 1.0.0
+description: Rewrite Chinese spoken scripts from validated scorecards with dimension-specific evidence, factual guardrails, and rescore handoff.
+category: [content, short-video, copywriting, quality]
+capabilities:
+  - optimize_from_scorecard
+  - rewrite_from_scorecard
+  - plan_dimension_changes
+  - validate_revision
+  - preserve_factual_integrity
+actions: [optimize, rewrite, validate]
+states: [awaiting_score, planning, rewriting, validation, completed]
+inputs:
+  required_by_action:
+    optimize: [script, scorecard]
+    rewrite: [script, scorecard]
+    validate: [optimization]
+  optional: [target_dimensions, target_score, variant_count, max_target_dimensions, max_change_ratio, duration, audience, platform, style, preserve, context]
+outputs: [optimization, variants, optimized_script, target_dimensions, changes, metrics, context]
+interactive: false
+tools: [python]
+dependencies: [score-viral-script]
+requirements:
+  runtime: []
+  binaries: []
+  permissions:
+    filesystem: optional
+    network: false
+  external_services:
+    llm: required
+requirements_by_action:
+  optimize: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  rewrite: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  validate: {runtime: [python], binaries: [], permissions: {filesystem: optional}, external_services: {}}
+execution_modes: [full, partial, text_only]
+schemas:
+  invocation: ../../schemas/invocation.schema.json
+  response: ../../schemas/response.schema.json
+  score: ../../schemas/score.schema.json
+  optimization: ../../schemas/optimization.schema.json
+references:
+  rules: references/optimization_rules.yaml
+

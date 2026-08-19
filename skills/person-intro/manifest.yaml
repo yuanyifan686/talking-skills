@@ -1,0 +1,38 @@
+id: person-intro
+name: Person Introduction Card
+version: 1.0.0
+protocol_version: 1.0.0
+description: Select concise identity copy and optionally render a configurable person introduction segment.
+category: [content, short-video, graphics, video]
+capabilities: [select_person_summary, create_intro_spec, render_intro]
+actions: [generate, render, run_pipeline]
+states: [content_selection, layout, rendering, completed]
+inputs:
+  required_by_action:
+    generate: [person]
+    render: [person]
+    run_pipeline: [person]
+  optional: [duration, position, person_position, animation, style, logo, avatar, logo_file, background_image, font, source_video, output_dir, context]
+outputs: [person_intro, render_spec, video, context]
+interactive: false
+tools: [python, ffmpeg, ffprobe]
+dependencies: []
+requirements:
+  runtime: []
+  binaries: []
+  permissions:
+    filesystem: optional
+    network: false
+  external_services: {}
+requirements_by_action:
+  generate: {runtime: [], binaries: [], permissions: {}, external_services: {}}
+  render: {runtime: [python], binaries: [ffmpeg, ffprobe], permissions: {filesystem: required}, external_services: {}}
+  run_pipeline: {runtime: [python], binaries: [ffmpeg, ffprobe], permissions: {filesystem: required}, external_services: {}}
+execution_modes: [full, partial, text_only]
+schemas:
+  invocation: ../../schemas/invocation.schema.json
+  response: ../../schemas/response.schema.json
+  person: ../../schemas/person.schema.json
+  video: ../../schemas/video.schema.json
+references:
+  styles: references/intro_styles.yaml

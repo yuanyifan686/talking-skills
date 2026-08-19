@@ -1,0 +1,17 @@
+protocol_version: 1.0.0
+request_id: example-score-001
+skill: score-viral-script
+action: score
+mode: auto
+input:
+  title: AI工具用得越多，就真的越厉害吗？
+  script: 真正会使用AI的人，并不是每天研究几十种AI工具的人。工具不是能力，解决问题才是能力。
+  platform: douyin
+  audience: 职场人
+  strict_evidence: true
+context:
+  protocol_version: 1.0.0
+  project:
+    id: ai_video_001
+    topic: AI学习
+    platform: douyin

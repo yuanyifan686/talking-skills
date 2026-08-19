@@ -1,0 +1,12 @@
+id: generic
+version: 1.0.0
+description: Reference adapter for converting universal invocation objects into portable skill dispatch packets.
+core_skill_root: ../../skills
+protocol:
+  invocation_schema: ../../schemas/invocation.schema.json
+  response_schema: ../../schemas/response.schema.json
+operations:
+  discover: List core manifests without loading business instructions.
+  prepare: Validate invocation, detect capabilities, and resolve manifest and SKILL.md paths.
+  validate_response: Validate a skill response envelope.
+business_logic: forbidden

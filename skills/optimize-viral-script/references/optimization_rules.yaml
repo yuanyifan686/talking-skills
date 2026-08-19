@@ -1,0 +1,90 @@
+version: 1.0.0
+target_score: 8
+defaults:
+  variant_count: 1
+  max_variants: 3
+  max_iterations: 2
+  duration_tolerance: 0.15
+  max_target_dimensions:
+    polish: 1
+    surgical: 2
+    rewrite: 4
+
+selection:
+  order:
+    - interrupt_prediction
+    - reward_expectation
+    - loss_aversion
+    - precise_naming
+    - replicability
+    - no_fluff
+    - ai_adaptability
+    - emotional_intensity
+    - memorability
+    - shareability
+  rules:
+    - Honor explicit target_dimensions first.
+    - Otherwise select dimensions below target_score by ascending score.
+    - Break ties by core, practicality, then bonus order.
+    - Do not weaken a dimension scoring 8 or above to improve another dimension.
+
+modes:
+  polish:
+    score_range: [80, 100]
+    intent: Make one bounded improvement while preserving nearly all wording and structure.
+  surgical:
+    score_range: [60, 79]
+    intent: Replace, move, compress, or add only the passages needed for the selected weak dimensions.
+  rewrite:
+    score_range: [0, 59]
+    intent: Rebuild the hook-to-ending sequence while preserving verified facts, thesis, audience, and useful source material.
+
+dimensions:
+  interrupt_prediction:
+    objective: Create a credible expectation reversal early and sustain an information gap.
+    techniques: [reverse_common_belief, surprising_consequence, contrast_before_after]
+    guardrails: [no_fake_fact, no_false_certainty, keep_thesis_consistent]
+  reward_expectation:
+    objective: State a concrete current-video payoff and deliver it before the ending.
+    techniques: [frontload_payoff, name_deliverable, demonstrate_result]
+    guardrails: [no_unfulfilled_tease, no_guaranteed_result, payoff_must_match_body]
+  loss_aversion:
+    objective: Make an honest opportunity cost or downside specific and relevant.
+    techniques: [time_cost, missed_opportunity, avoidable_rework, comparative_disadvantage]
+    guardrails: [no_fake_urgency, no_fearmongering, no_invented_deadline]
+  precise_naming:
+    objective: Name a concrete thought, frustration, behavior, or scene the audience recognizes.
+    techniques: [inner_monologue, concrete_scene, audience_language, hidden_frustration]
+    guardrails: [no_stereotyping, no_mind_reading_as_fact]
+  replicability:
+    objective: Turn the insight into a reusable formula, checklist, or sequence.
+    techniques: [formula, three_step_method, decision_rule, fill_in_template]
+    guardrails: [steps_must_be_actionable, avoid_empty_framework]
+  no_fluff:
+    objective: Remove repetition and replace general claims with necessary evidence or action.
+    techniques: [merge_repetition, delete_throat_clearing, compress_lists, concrete_over_abstract]
+    guardrails: [preserve_logic, preserve_spoken_rhythm, keep_required_context]
+  ai_adaptability:
+    objective: Make the structure and variables explicit enough for reliable AI reuse.
+    techniques: [clear_modules, named_variables, stable_sequence, explicit_constraints]
+    guardrails: [do_not_put_workflow_labels_in_spoken_copy]
+  emotional_intensity:
+    objective: Raise stakes through a credible scene, contrast, or consequence.
+    techniques: [specific_scene, status_tension, time_pressure, emotional_contrast]
+    guardrails: [no_personal_attack, no_fabricated_case, no_manipulative_shame]
+  memorability:
+    objective: Create one concise line that compresses the central insight.
+    techniques: [balanced_contrast, short_rule, metaphor, rhythmic_parallelism]
+    guardrails: [no_cliche_only, no_claim_beyond_evidence]
+  shareability:
+    objective: Give the audience a useful reminder, identity statement, or portable artifact.
+    techniques: [shareable_checklist, social_currency, send_to_specific_person, quotable_position]
+    guardrails: [no_engagement_bait, no_forced_forwarding]
+
+global_guardrails:
+  - Preserve supported facts unless the user authorizes fact changes.
+  - Mark unverifiable examples as hypothetical or request verification.
+  - Do not invent statistics, organizations, credentials, cases, scarcity, or guarantees.
+  - Keep the result directly speakable and omit analysis labels from spoken copy.
+  - Rescore the optimized script before claiming improvement.
+

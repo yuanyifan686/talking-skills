@@ -1,0 +1,44 @@
+version: 1.0.0
+styles:
+  - id: professional
+    typography: {hierarchy: strong, weight: medium_bold}
+    animation: {type: fade_slide, duration: 0.4}
+    layout: {max_lines: 4, alignment: left}
+    decoration: {level: minimal, accent: neutral}
+    visual: {background: "111827", panel: "0B1220", accent: "E5E7EB", text: "FFFFFF"}
+  - id: technology
+    typography: {hierarchy: strong, weight: bold}
+    animation: {type: scan_fade, duration: 0.35}
+    layout: {max_lines: 4, alignment: left}
+    decoration: {level: medium, accent: cyan}
+    visual: {background: "06131F", panel: "071C2A", accent: "22D3EE", text: "F8FAFC"}
+  - id: teacher
+    typography: {hierarchy: calm, weight: medium}
+    animation: {type: fade, duration: 0.5}
+    layout: {max_lines: 4, alignment: left}
+    decoration: {level: minimal, accent: warm}
+    visual: {background: "1C1917", panel: "292524", accent: "FDBA74", text: "FFF7ED"}
+  - id: entrepreneur
+    typography: {hierarchy: bold, weight: bold}
+    animation: {type: rise, duration: 0.35}
+    layout: {max_lines: 4, alignment: left}
+    decoration: {level: medium, accent: gold}
+    visual: {background: "17120A", panel: "2A1B08", accent: "FBBF24", text: "FFFBEB"}
+  - id: creator
+    typography: {hierarchy: playful, weight: bold}
+    animation: {type: pop_fade, duration: 0.3}
+    layout: {max_lines: 3, alignment: left}
+    decoration: {level: medium, accent: coral}
+    visual: {background: "1F1018", panel: "351329", accent: "FB7185", text: "FFF1F2"}
+  - id: minimal
+    typography: {hierarchy: subtle, weight: medium}
+    animation: {type: fade, duration: 0.4}
+    layout: {max_lines: 3, alignment: left}
+    decoration: {level: none, accent: white}
+    visual: {background: "111111", panel: "1F1F1F", accent: "FFFFFF", text: "FFFFFF"}
+  - id: corporate
+    typography: {hierarchy: strong, weight: semibold}
+    animation: {type: fade_slide, duration: 0.45}
+    layout: {max_lines: 4, alignment: left}
+    decoration: {level: minimal, accent: brand}
+    visual: {background: "0F172A", panel: "172554", accent: "93C5FD", text: "EFF6FF"}

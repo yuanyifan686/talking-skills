@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/script.schema.json",
+  "title": "Spoken Script",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["title", "content", "estimated_duration", "estimated_characters"],
+  "properties": {
+    "title": {"type": "string", "minLength": 1},
+    "content": {"type": "string", "minLength": 1},
+    "platform": {"type": "string"},
+    "audience": {"type": "string"},
+    "style": {"type": "string"},
+    "template_id": {"type": "string"},
+    "question_hook": {"type": "boolean"},
+    "estimated_duration": {"type": "number", "exclusiveMinimum": 0},
+    "estimated_characters": {"type": "integer", "minimum": 1},
+    "metadata": {"type": "object"}
+  }
+}

@@ -1,0 +1,58 @@
+version: 1.0.0
+styles:
+  - id: sharp_opinion
+    name: 犀利观点型
+    voice: direct
+    intensity: high
+    sentence_pattern: short_and_decisive
+    suitable_goals: [comments, followers]
+    avoid: [personal_attack, unsupported_absolute]
+  - id: counter_intuitive
+    name: 反常识型
+    voice: analytical
+    intensity: medium_high
+    sentence_pattern: belief_then_reverse
+    suitable_goals: [completion, comments]
+    avoid: [fake_contradiction]
+  - id: story_conflict
+    name: 故事冲突型
+    voice: vivid
+    intensity: medium
+    sentence_pattern: scene_and_turn
+    suitable_goals: [completion, trust]
+    avoid: [fabricated_identity, long_setup]
+  - id: knowledge_breakdown
+    name: 知识拆解型
+    voice: clear
+    intensity: medium
+    sentence_pattern: question_and_layers
+    suitable_goals: [saves, trust]
+    avoid: [lecture_tone, jargon]
+  - id: emotional_resonance
+    name: 情绪共鸣型
+    voice: warm
+    intensity: medium
+    sentence_pattern: recognition_and_relief
+    suitable_goals: [trust, shares]
+    avoid: [emotional_manipulation]
+  - id: humorous_roast
+    name: 幽默吐槽型
+    voice: playful
+    intensity: medium_high
+    sentence_pattern: observation_and_punchline
+    suitable_goals: [shares, comments]
+    avoid: [humiliation, discriminatory_joke]
+  - id: business_insight
+    name: 商业洞察型
+    voice: concise_expert
+    intensity: medium
+    sentence_pattern: signal_mechanism_implication
+    suitable_goals: [trust, conversion]
+    avoid: [income_promise, invented_data]
+  - id: natural_chat
+    name: 自然聊天型
+    voice: conversational
+    intensity: low_medium
+    sentence_pattern: spoken_fragments
+    suitable_goals: [trust, completion]
+    avoid: [filler_overuse, essay_tone]

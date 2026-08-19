@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/person.schema.json",
+  "title": "Person",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name"],
+  "properties": {
+    "name": {"type": "string", "minLength": 1},
+    "title": {"type": "string"},
+    "organization": {"type": "string"},
+    "roles": {"type": "array", "items": {"type": "string"}},
+    "education": {"type": "array", "items": {"type": "string"}},
+    "experience": {"type": "array", "items": {"type": "string"}},
+    "tagline": {"type": "string"},
+    "logos": {"type": "array", "items": {"type": "string"}},
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "avatar": {"type": "string"},
+        "logos": {"type": "array", "items": {"type": "string"}},
+        "background": {"type": "string"},
+        "font": {"type": "string"}
+      }
+    }
+  },
+  "anyOf": [
+    {"required": ["title"]},
+    {"required": ["organization"]},
+    {"required": ["roles"]},
+    {"required": ["education"]},
+    {"required": ["experience"]},
+    {"required": ["tagline"]}
+  ]
+}

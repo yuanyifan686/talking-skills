@@ -1,0 +1,42 @@
+id: question-hook
+name: Question Hook Composer
+version: 1.1.0
+protocol_version: 1.0.0
+description: Generate a question hook, fit it safely on screen, optionally synthesize audio, render an intro, and compose it with source video.
+category: [content, short-video, audio, video]
+capabilities: [generate_hook, synthesize_hook, render_question_intro, compose_video]
+actions: [generate, synthesize, compose, run_pipeline]
+states: [hook_generation, tts, intro_render, composition, completed]
+inputs:
+  required_by_action:
+    generate: [script]
+    synthesize: [hook]
+    compose: [hook, video]
+    run_pipeline: [script]
+  optional: [hook_type, voice, speed, tts_provider, intro, output_dir, context]
+outputs: [hook, tts, intro, video, context]
+interactive: false
+tools: [python, ffmpeg, ffprobe]
+dependencies: [shared-tts]
+requirements:
+  runtime: []
+  binaries: []
+  permissions:
+    filesystem: optional
+    network: optional
+  external_services:
+    tts: optional
+requirements_by_action:
+  generate: {runtime: [], binaries: [], permissions: {}, external_services: {llm: required}}
+  synthesize: {runtime: [python], binaries: [], permissions: {filesystem: required}, external_services: {tts: optional}}
+  compose: {runtime: [python], binaries: [ffmpeg, ffprobe], permissions: {filesystem: required}, external_services: {}}
+  run_pipeline: {runtime: [python], binaries: [ffmpeg, ffprobe], permissions: {filesystem: required, network: optional}, external_services: {llm: required, tts: optional}}
+execution_modes: [full, partial, text_only]
+schemas:
+  invocation: ../../schemas/invocation.schema.json
+  response: ../../schemas/response.schema.json
+  video: ../../schemas/video.schema.json
+references:
+  patterns: references/hook_patterns.yaml
+  layout: scripts/hook_layout.py
+  tts_provider: ../../shared/tts/seed_audio.py

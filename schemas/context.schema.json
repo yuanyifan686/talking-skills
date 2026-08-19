@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/context.schema.json",
+  "title": "Portable Talking Skills Pipeline Context",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["project"],
+  "properties": {
+    "protocol_version": {"type": "string", "default": "1.0.0"},
+    "project": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "id": {"type": "string"},
+        "topic": {"type": "string"},
+        "platform": {"type": "string"},
+        "script": {"$ref": "script.schema.json"},
+        "script_score": {"$ref": "score.schema.json"},
+        "script_score_previous": {"$ref": "score.schema.json"},
+        "script_optimization": {"$ref": "optimization.schema.json"},
+        "hook": {
+          "type": "object",
+          "properties": {
+            "text": {"type": "string"},
+            "type": {"type": "string"},
+            "estimated_duration": {"type": "number"},
+            "relation_to_script": {"type": "string"},
+            "audio": {"type": "string"}
+          },
+          "additionalProperties": true
+        },
+        "person": {"$ref": "person.schema.json"},
+        "video": {"$ref": "video.schema.json"},
+        "output": {"type": "object"}
+      }
+    }
+  }
+}

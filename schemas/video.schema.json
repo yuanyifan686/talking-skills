@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://talking-skills.local/schemas/video.schema.json",
+  "title": "Video Artifact",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "source": {"type": "string"},
+    "intro": {"type": "string"},
+    "question_intro": {"type": "string"},
+    "person_intro": {"type": "string"},
+    "hooked": {"type": "string"},
+    "final": {"type": "string"},
+    "width": {"type": "integer", "minimum": 1},
+    "height": {"type": "integer", "minimum": 1},
+    "fps": {"type": "number", "exclusiveMinimum": 0},
+    "duration": {"type": "number", "exclusiveMinimum": 0},
+    "intro_type": {"enum": ["freeze_frame", "solid_background", "provided_clip"]},
+    "audio": {"type": "string"},
+    "composition_plan": {"type": "object"},
+    "metadata": {"type": "object"}
+  }
+}

@@ -1,0 +1,36 @@
+protocol_version: 1.0.0
+default_platform: douyin
+default_duration: 60
+default_language: zh-CN
+output_directory: output
+execution_mode: auto
+capability_detection:
+  check: [llm, filesystem, python, shell, ffmpeg, ffprobe, network, secrets, image_processing, video_processing]
+tts:
+  provider: auto
+  primary_provider: cosyvoice
+  fallback_provider: seed-audio
+  secondary_fallback_provider: volcengine
+  voice: null
+  speed: 1.0
+  sample_rate: 24000
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  intro_duration: 4
+  intro_type: solid_background
+  background: "#111827"
+  hook_layout:
+    max_width_ratio: 0.84
+    safe_margin_x: 96
+    safe_margin_y: 160
+    min_font_size: 32
+    max_lines: 3
+    max_hook_chars: 25
+    auto_compress: true
+person_intro:
+  style: professional
+  position: auto
+  animation: fade_slide
+  max_lines: 4

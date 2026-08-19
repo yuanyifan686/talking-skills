@@ -1,0 +1,99 @@
+version: 1.0.0
+total_points: 100
+evidence_policy:
+  quote_must_match_source: true
+  reason_required: true
+  absent_feature: Quote the closest relevant sentence and explain what is missing.
+  forbidden: [fabricated_quote, generic_praise, score_without_reason]
+
+categories:
+  core:
+    label: 核心维度
+    maximum: 40
+    dimensions:
+      - id: interrupt_prediction
+        name: 打断预测
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: 完全符合用户预期，无任何反转}
+          - {range: [4, 6], rule: 有轻微反转，但不够强烈}
+          - {range: [7, 10], rule: 连续打破用户预测，让用户觉得“这不对”}
+        example: "我花5万9报课→AI3分钟拆完→做出百万爆款，连续3次打破‘报课=学知识’的预期"
+      - id: reward_expectation
+        name: 奖励期待
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: 用户看不到任何收益}
+          - {range: [4, 6], rule: 有模糊收益，但不明确}
+          - {range: [7, 10], rule: 清晰告诉用户看完能得到什么具体好处}
+        example: 看完这条视频，你也能写出百万播放的爆款开头
+      - id: loss_aversion
+        name: 损失厌恶
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: 没有任何“不看会错过”的暗示}
+          - {range: [4, 6], rule: 有轻微暗示，但不强烈}
+          - {range: [7, 10], rule: 明确让用户觉得不看会吃亏或落后}
+        example: 不掌握这个方法，你还会继续当冤大头
+      - id: precise_naming
+        name: 精准命名
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: 说的是用户没感觉的话}
+          - {range: [4, 6], rule: 能说出部分用户感受}
+          - {range: [7, 10], rule: 精准说出用户心里有但嘴上说不出的感受}
+        example: 手指已经准备划走，但大脑让你再看一会
+
+  practicality:
+    label: 落地性
+    maximum: 30
+    dimensions:
+      - id: replicability
+        name: 可复制性
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: 完全无法复制，主要靠运气}
+          - {range: [4, 6], rule: 能复制，但需要大量调整}
+          - {range: [7, 10], rule: 有明确句式或公式，可以直接套用}
+        example: 我在A事情上上当，结果B方法解决了问题还做得更好
+      - id: no_fluff
+        name: 无废话程度
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: 有大量文学分析或修辞手法说明}
+          - {range: [4, 6], rule: 有部分理论，但也有实操}
+          - {range: [7, 10], rule: 直接给实操方法，没有正确的废话}
+        example: 不说“运用了对比手法”，直接给可套用公式
+      - id: ai_adaptability
+        name: AI适配性
+        range: [1, 10]
+        bands:
+          - {range: [1, 3], rule: AI无法稳定拆解，只能依赖人工分析}
+          - {range: [4, 6], rule: AI能拆解，但需要多次提示}
+          - {range: [7, 10], rule: AI一次就能拆解出核心逻辑}
+        example: 提示“给我句式公式，不要文学分析”，AI能直接输出结果
+
+  bonus:
+    label: 加分项
+    maximum: 30
+    dimensions:
+      - id: emotional_intensity
+        name: 情绪强度
+        range: [0, 10]
+        rule: 能引发用户明显的愤怒、好奇、惊喜或共鸣；不得依赖虚假事实或人身攻击
+        example: 当冤大头被割韭菜
+      - id: memorability
+        name: 记忆点
+        range: [0, 10]
+        rule: 有能被复述、引用或记住的金句或句式
+        example: 知道该问什么，比知道答案更值钱
+      - id: shareability
+        name: 传播性
+        range: [0, 10]
+        rule: 内容具有身份表达、实用提醒或社交货币，适合转发给他人
+        example: 学会用AI拆解爆款，躺着收割注意力
+
+conclusions:
+  - {min: 80, max: 100, level: very_high, label: 爆款潜力极高，可直接复用}
+  - {min: 60, max: 79, level: potential, label: 有爆款潜力，需优化1-2个维度}
+  - {min: 0, max: 59, level: insufficient, label: 不具备爆款潜质，建议重新创作}
